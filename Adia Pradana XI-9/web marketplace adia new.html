@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YaYang Store</title>
+
+    <!-- FONT ELEGAN DARI GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff0f5; /* Baby Pink */
+            color: #1b263b; /* Soft Navy */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            /* 
+               FOTO BACKGROUND HEADER 
+               Memakai file 'pink bg.jfif'
+            */
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('pink bg.jfif');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px 60px 20px; /* Dibuat tinggi & luas */
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Playfair Display', serif; /* Font bagus & elegan */
+            font-size: 42px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        nav {
+            margin-top: 35px;
+        }
+
+        nav button {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            margin: 0 6px;
+            cursor: pointer;
+            padding: 10px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        nav button:hover, nav button.active {
+            background-color: #e91e63; /* Accent Pink */
+            border-color: #e91e63;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ================= CONTAINER HALAMAN ================= */
+        .page {
+            display: none; /* Sembunyikan semua halaman secara default */
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* Tampilkan halaman yang aktif saja */
+        .page.active {
+            display: block;
+        }
+
+        /* TOMBOL PINK */
+        .btn-pink {
+            background-color: #e91e63;
+            color: white;
+            padding: 12px 26px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-pink:hover {
+            background-color: #d81b60;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+        }
+
+        /* ================= DEKORASI FOTO DILENGKAPI DI HOME ================= */
+        .banner-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 1px solid #ffd1dc;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .banner-box img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .model-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .model-card {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ffd1dc;
+            width: 280px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .model-card p {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0 5px 0;
+            color: #e91e63;
+        }
+
+        /* KATALOG PRODUK */
+        .produk-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .card-produk {
+            background-color: #ffffff;
+            border: 1px solid #ffd1dc;
+            border-radius: 10px;
+            width: 220px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-produk img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .harga {
+            color: #e91e63;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* FORM PEMBELIAN & KONTAK */
+        .form-box {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ffd1dc;
+            text-align: left;
+            max-width: 480px;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        footer {
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            border-top: 2px solid #ffd1dc;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER BERGAMBAR TINGGI & ELEGAN -->
+    <header>
+        <h1>YAYANG STORE</h1>
+        <nav>
+            <button class="nav-btn active" onclick="bukaHalaman('home', this)">Home</button>
+            <button class="nav-btn" onclick="bukaHalaman('produk', this)">Produk</button>
+            <button class="nav-btn" onclick="bukaHalaman('tentang', this)">Tentang</button>
+            <button class="nav-btn" onclick="bukaHalaman('kontak', this)">Kontak</button>
+        </nav>
+    </header>
+
+    <!-- ================= 1. HALAMAN HOME ================= -->
+    <div id="home" class="page active">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 28px;">Selamat Datang di YaYang Store</h2>
+        <p style="color: #666;">Pusat koleksi boneka plushie impian yang lembut, lucu, dan menggemaskan!</p>
+        
+        <!-- FOTO BANNER UTAMA HOME -->
+        <div class="banner-box">
+            <!-- TANDAI: Ganti 'plushies.jpg' dengan nama file foto banner utama kamu -->
+            <img src="banner.jfif" alt="Banner Utama YaYang Store" onerror="this.src='https://via.placeholder.com/800x350/ffd1dc/1b263b?text=Taro+Foto+Banner+Utama+Di+Sini'">
+            <br><br>
+            <button class="btn-pink" onclick="bukaHalaman('produk', document.querySelectorAll('.nav-btn')[1])">Lihat Koleksi Produk</button>
+        </div>
+
+        <!-- FOTO MODEL / GALERI FOTO HOME -->
+        <h3 style="margin-top: 40px; font-family: 'Playfair Display', serif;">Model & Galeri Pilihan</h3>
+        <div class="model-grid">
+
+            <!-- FOTO MODEL 1 -->
+            <div class="model-card">
+                <!-- TANDAI: Ganti 'foto-model-1.jpg' -->
+                <img src="kid model 1.jfif" alt="Model 1" onerror="this.src='https://via.placeholder.com/280x220/fff0f5/e91e63?text=Taro+Foto+Model+1'">
+                <p>New Arrival Collection</p>
+            </div>
+
+            <!-- FOTO MODEL 2 -->
+            <div class="model-card">
+                <!-- TANDAI: Ganti 'adult model 2.jpg' -->
+                <img src="adult model 2.jfif" alt="Model 2" onerror="this.src='https://via.placeholder.com/280x220/fff0f5/e91e63?text=Taro+Foto+Model+2'">
+                <p>Best Seller Plushie</p>
+            </div>
+
+            <!-- FOTO MODEL 3 -->
+            <div class="model-card">
+                <!-- TANDAI: Ganti 'kid model 3.jpg' -->
+                <img src="kid model 3.jfif" alt="Model 3" onerror="this.src='https://via.placeholder.com/280x220/fff0f5/e91e63?text=Taro+Foto+Model+3'">
+                <p>Soft & Cute Edition</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= 2. HALAMAN PRODUK ================= -->
+    <div id="produk" class="page">
+        <h2 style="font-family: 'Playfair Display', serif;">Katalog Produk Boneka</h2>
+        <p style="color: #666;">Pilih boneka favoritmu di bawah ini:</p>
+
+        <div class="produk-grid">
+            <!-- PRODUK 1 -->
+            <div class="card-produk">
+                <img src="pink bunny plushie.jpeg" alt="Bunny Bonnie" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Bunny+Bonnie'">
+                <h3>Bunny Bonnie</h3>
+                <div class="harga">Rp 125.000</div>
+                <button class="btn-pink" onclick="pilihProduk('Bunny Bonnie')">Beli Sekarang</button>
+            </div>
+
+            <!-- PRODUK 2 -->
+            <div class="card-produk">
+                <img src="unicorn plushie.jpeg" alt="Its a Fluffy Unicorn" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Fluffy+Unicorn'">
+                <h3>Its a Fluffy Unicorn</h3>
+                <div class="harga">Rp 115.000</div>
+                <button class="btn-pink" onclick="pilihProduk('Its a Fluffy Unicorn')">Beli Sekarang</button>
+            </div>
+
+            <!-- PRODUK 3 -->
+            <div class="card-produk">
+                <img src="elephant plushie.jpeg" alt="The Adorable Elephant" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Elephant'">
+                <h3>The Adorable Elephant</h3>
+                <div class="harga">Rp 140.000</div>
+                <button class="btn-pink" onclick="pilihProduk('The Adorable Elephant')">Beli Sekarang</button>
+            </div>
+
+            <!-- PRODUK 4 -->
+            <div class="card-produk">
+                <img src="bear plushie.jpeg" alt="Mr.Teddy" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Mr.Teddy'">
+                <h3>Mr.Teddy</h3>
+                <div class="harga">Rp 135.000</div>
+                <button class="btn-pink" onclick="pilihProduk('Mr.Teddy')">Beli Sekarang</button>
+            </div>
+
+            <!-- PRODUK 5 -->
+            <div class="card-produk">
+                <img src="sheep plushie.jpeg" alt="Suzy Sheep" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Suzy+Sheep'">
+                <h3>Suzy Sheep</h3>
+                <div class="harga">Rp 160.000</div>
+                <button class="btn-pink" onclick="pilihProduk('Suzy Sheep')">Beli Sekarang</button>
+            </div>
+
+            <!-- PRODUK 6 -->
+            <div class="card-produk">
+                <img src="monkey plushie.jpeg" alt="The Little Monkey" onerror="this.src='https://via.placeholder.com/200/fff0f5/e91e63?text=Little+Monkey'">
+                <h3>The Little Monkey</h3>
+                <div class="harga">Rp 185.000</div>
+                <button class="btn-pink" onclick="pilihProduk('The Little Monkey')">Beli Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= 3. HALAMAN FORM CHECKOUT / BELI ================= -->
+    <div id="checkout" class="page">
+        <h2 style="font-family: 'Playfair Display', serif;">Form Pembelian</h2>
+        <p style="color: #666;">Lengkapi data di bawah ini untuk memesan:</p>
+
+        <div class="form-box">
+            <form onsubmit="kirimPesanan(event)">
+                <div class="form-group">
+                    <label>Nama Lengkap:</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama kamu" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor HP / WhatsApp:</label>
+                    <input type="tel" id="hp" placeholder="08xxxxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pilih Boneka:</label>
+                    <select id="pilihan-boneka">
+                        <option value="Bunny Bonnie">Bunny Bonnie - Rp 125.000</option>
+                        <option value="Its a Fluffy Unicorn">Its a Fluffy Unicorn - Rp 115.000</option>
+                        <option value="The Adorable Elephant">The Adorable Elephant - Rp 140.000</option>
+                        <option value="Mr.Teddy">Mr.Teddy - Rp 135.000</option>
+                        <option value="Suzy Sheep">Suzy Sheep - Rp 160.000</option>
+                        <option value="The Little Monkey">The Little Monkey - Rp 185.000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat Lengkap:</label>
+                    <textarea id="alamat" rows="3" placeholder="Masukkan alamat pengiriman" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-pink" style="width: 100%;">Kirim Pesanan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= 4. HALAMAN TENTANG ================= -->
+    <div id="tentang" class="page">
+        <h2 style="font-family: 'Playfair Display', serif;">Tentang YaYang Store</h2>
+        <p style="line-height: 1.8; margin-top: 20px; color: #444;">
+            <strong>YaYang Store</strong> adalah toko online terpercaya yang menyediakan berbagai koleksi boneka plushie pilihan berkualitas. Boneka kami terbuat dari bahan lembut berstandar tinggi yang sangat nyaman dipeluk. Cocok dijadikan hadiah ulang tahun, koleksi pribadi, maupun teman tidur!
+        </p>
+    </div>
+
+    <!-- ================= 5. HALAMAN KONTAK ================= -->
+    <div id="kontak" class="page">
+        <h2 style="font-family: 'Playfair Display', serif;">Hubungi Kami</h2>
+        <p style="color: #666;">Punya pertanyaan? Silakan hubungi kami melalui informasi di bawah ini:</p>
+
+        <div style="background-color: white; padding: 25px; border-radius: 10px; display: inline-block; text-align: left; margin-top: 15px; border: 1px solid #ffd1dc; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+            <p><strong>WhatsApp:</strong> 0812-3456-7890</p>
+            <p><strong>Instagram:</strong> @yayangstore.id</p>
+            <p><strong>Alamat Toko:</strong> Bandung, Jawa Barat</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 YaYang Store - Tugas Informatika SMA</p>
+    </footer>
+
+    <!-- JAVASCRIPT SIMPLE -->
+    <script>
+        function bukaHalaman(namaHalaman, tombol) {
+            let semuaHalaman = document.querySelectorAll('.page');
+            semuaHalaman.forEach(hal => hal.classList.remove('active'));
+
+            let semuaTombol = document.querySelectorAll('.nav-btn');
+            semuaTombol.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(namaHalaman).classList.add('active');
+
+            if (tombol) {
+                tombol.classList.add('active');
+            }
+        }
+
+        function pilihProduk(namaProduk) {
+            bukaHalaman('checkout');
+            document.getElementById('pilihan-boneka').value = namaProduk;
+        }
+
+        function kirimPesanan(event) {
+            event.preventDefault();
+            let nama = document.getElementById('nama').value;
+            alert('Terima kasih ' + nama + '! Pesanan kamu berhasil dikirim.');
+        }
+    </script>
+</body>
+</html>
